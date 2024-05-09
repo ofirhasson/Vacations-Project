@@ -1,4 +1,4 @@
-Vacations Project
+## Vacations Project
 
 - In this project you can observe as a user at all of the offered vacations and also perform likes to them. You can also to some filtering operations on them.
 
