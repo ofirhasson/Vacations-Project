@@ -1,0 +1,108 @@
+#running this file(without rebuilding an existing image): docker-compose up -d
+#running this file(including rebuilding an existing image): docker-compose up -d --build
+#-d means Detached = the terminal will be free
+#stopping: docker-compose down
+#Upload all images to docker hub: docker-compose push
+
+# docker-compose version
+version: '3.8'
+
+# services list:
+services:
+
+  #Database service:
+  vacations-database:
+    image: ofirhasson18/vacations-database-image:1.0
+
+    # where is the location of the Dockerfile:
+    build: ./Database
+
+    #Container name:
+    container_name: vacations-database-container
+
+    #in crash - what to do - restart unless manually stopped:
+    restart: unless-stopped
+
+    #Volumes:
+    volumes:
+      - vacations-db:/var/lib/mysql
+
+    #Environment Variables needed by MySQL Installation:
+    environment:
+      MYSQL_HOST: localhost #Internally for the container
+      MYSQL_USER: Alice
+      MYSQL_PASSWORD: Wonderland
+      MYSQL_ROOT_PASSWORD: Wonderland #needed by MySQL image.
+      MYSQL_DATABASE: vacations
+
+  #------------------------------------------------------------------------------------
+
+  #Backend service:
+  vacations-backend:
+
+    # on which service we're depanding on:
+    depends_on:
+      - vacations-database
+
+    #Image name to create from Dockerfile:
+    image: ofirhasson18/vacations-backend-image:1.0
+
+    # where is the location of the Dockerfile:
+    build: ./Backend
+
+    #Container name:
+    container_name: vacations-backend-container
+
+    #port binding:
+    ports:
+      - 4000:4000
+
+    #in crash - what to do - restart unless manually stopped:
+    restart: unless-stopped
+
+    #Volumes:
+    volumes:
+      - images:/app/src/1-assets/images
+      - errors:/app/errors
+
+    #Environment Variables needed by Backend container:
+    environment:
+      MYSQL_HOST: vacations-database #The container service name is the computer name in the network
+      MYSQL_USER: Alice
+      MYSQL_PASSWORD: Wonderland
+      MYSQL_DATABASE: vacations
+
+#------------------------------------------------------------------------------------
+
+#Frontend service:
+  vacations-frontend:
+
+    # on which service we're depanding on:
+    depends_on:
+      - vacations-backend
+
+    #Image name to create from Dockerfile:
+    image: ofirhasson18/vacations-frontend-image:1.0
+
+    # where is the location of the Dockerfile:
+    build: ./Frontend
+
+    #Container name:
+    container_name: vacations-frontend-container
+
+    #port binding:
+    ports:
+      - 3000:3000
+
+    #in crash - what to do - restart unless manually stopped:
+    restart: unless-stopped
+
+#------------------------------------------------------------------------------------
+
+volumes:
+  vacations-db:
+  images:
+  errors:
+
+
+# "start": "nodemon --exec ts-node src/app.ts --quiet",

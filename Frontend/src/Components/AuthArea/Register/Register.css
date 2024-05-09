@@ -1,0 +1,57 @@
+.Register {
+    height: 100%;
+    background-image: url("../../../Assets/Images/vacation_image.jpg");
+    background-attachment: fixed;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: relative;
+    display: flex;
+    height: 100vh;
+
+}
+
+.registerForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    flex-direction: column;
+    width: 33vw;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    padding: 20px;
+    position: relative;
+}
+
+.Overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.TextField {
+    background-color: white;
+}
+
+.ButtonGroup {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+form {
+    margin: auto;
+    width: 65%;
+}
+
+.Register img {
+    border-radius: 20px;
+    border: 2px solid;
+    height: 200px;
+    width: 300px;
+}

@@ -1,0 +1,19 @@
+.Header {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vh;
+}
+
+.logoImage {
+    width: 150px;
+    height: 70px;
+    mix-blend-mode: multiply;
+}
+
+@media (max-width: 710px) {
+    .Header span {
+        display: none;
+    }
+}

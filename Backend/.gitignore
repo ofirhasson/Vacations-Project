@@ -1,0 +1,7 @@
+node_modules
+
+.env
+
+Vacations.postman_collection.json
+
+errors.log

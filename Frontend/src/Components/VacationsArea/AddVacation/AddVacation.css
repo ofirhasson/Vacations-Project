@@ -1,0 +1,27 @@
+.Add form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.datePicker {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.Add img {
+    width: 300px;
+    height: 200px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+}
+
+.imageButton {
+    position: absolute;
+    bottom: 120px;
+}
